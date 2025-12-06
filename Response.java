@@ -8,8 +8,8 @@ public class Response implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private boolean success;   // true if the operation was successful
-    private String message;    
-    private Object payload;   
+    private String message;
+    private Object payload;    // optional extra data
 
     public Response(boolean success, String message, Object payload) {
         this.success = success;
