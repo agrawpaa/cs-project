@@ -1,0 +1,54 @@
+import java.io.Serializable;
+
+/**
+ * Response object sent from server to client.
+ * Contains whether the operation succeeded, a message, and optional payload data.
+ */
+public class Response implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private boolean success;   // true if the operation was successful
+    private String message;    // a human-readable message
+    private Object payload;    // optional extra data (e.g., reservations, totals)
+
+    public Response(boolean success, String message, Object payload) {
+        this.success = success;
+        this.message = message;
+        this.payload = payload;
+    }
+
+    // Getters
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Object getPayload() {
+        return payload;
+    }
+
+    // Setters
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setPayload(Object payload) {
+        this.payload = payload;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "success=" + success +
+                ", message='" + message + '\'' +
+                ", payload=" + payload +
+                '}';
+    }
+}
