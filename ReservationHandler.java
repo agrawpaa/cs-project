@@ -19,7 +19,7 @@ public class ReservationHandler {
         for (int i = 0; i < TOTAL_SEATS; i++) seatPrices.put(i, 10.0); // default price $10
     }
 
-    // ------------------ User Management ------------------
+    //User Management
     public boolean createAccount(String username, String password) {
         return db.addUser(new User(username, password));
     }
@@ -33,7 +33,7 @@ public class ReservationHandler {
         return false;
     }
 
-    // ------------------ Admin ------------------
+    //Admin
     public boolean validateAdmin(String key) {
         return ADMIN_KEY.equals(key);
     }
@@ -59,7 +59,7 @@ public class ReservationHandler {
         return seatPrices.getOrDefault(seatIndex, 10.0);
     }
 
-    // ------------------ Reservations ------------------
+    //Reservations
     public boolean makeReservation(String username, LocalDate date, LocalTime time, List<Integer> seatList) {
         User user = db.getUser(username);
         if (user == null) return false;
