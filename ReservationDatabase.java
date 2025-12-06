@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class ReservationDatabase {
-    private Map<String, User> users; //User
+    private Map<String, User> users;
     private List<Reservation> reservations;
     private final String USER_FILE = "users.dat";
     private final String RESERVATION_FILE = "reservations.dat";
