@@ -37,7 +37,6 @@ public class Reservation implements Serializable {
         return seats;
     }
 
-    // ✅ Add this method for GUI/Admin convenience
     public List<Integer> getSeatsAsList() {
         List<Integer> list = new ArrayList<>();
         for (int s : seats) list.add(s);
