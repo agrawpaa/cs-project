@@ -78,10 +78,39 @@ public class ClientHandler implements Runnable {
                     boolean ok = handler.cancelReservation(username, date, time, seats);
                     return new Response(ok, ok ? "Reservation cancelled" : "Could not cancel", null);
                 }
+                case "cancelAll" -> {
+                    Object[] data = (Object[]) payload;
+                    LocalDate date = (LocalDate) data[0];
+                    LocalTime time = (LocalTime) data[1];
+                    handler.cancelAllReservations(date, time);
+                    return new Response(true, "All reservations cancelled for slot", null);
+                }
                 case "validateAdmin" -> {
                     String key = (String) payload;
                     boolean ok = handler.validateAdmin(key);
                     return new Response(ok, ok ? "Admin access granted" : "Invalid admin key", null);
+                }
+                case "setHours" -> {
+                    Object[] data = (Object[]) payload;
+                    LocalTime open = (LocalTime) data[0];
+                    LocalTime close = (LocalTime) data[1];
+                    handler.setHours(open, close);
+                    return new Response(true, "Hours set", null);
+                }
+                case "setSeating" -> {
+                    Object[] data = (Object[]) payload;
+                    int r = (Integer) data[0];
+                    int c = (Integer) data[1];
+                    double defaultPrice = 10.0; // or get it from payload if needed
+                    handler.setSeatingArrangement(r, c, defaultPrice);
+                    return new Response(true, "Seating configured", null);
+                }
+                case "setSeatPrice" -> {
+                    Object[] data = (Object[]) payload;
+                    int idx = (Integer) data[0];
+                    double price = (Double) data[1];
+                    handler.setSeatPrice(idx, price);
+                    return new Response(true, "Price set", null);
                 }
                 default -> {
                     return new Response(false, "Unknown action: " + action, null);
