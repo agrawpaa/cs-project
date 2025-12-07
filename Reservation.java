@@ -40,7 +40,7 @@ public class Reservation implements Serializable {
         return Arrays.copyOf(seats, seats.length);
     }
 
-    // admin helped-seats as List<Integer>
+    // Admin/GUI helper: seats as List<Integer>
     public List<Integer> getSeatsAsList() {
         List<Integer> list = new ArrayList<>();
         for (int s : seats) list.add(s);
