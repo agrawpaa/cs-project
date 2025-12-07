@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class ReservationDatabase {
-    private Map<String, User> users;
+    private Map<String, User> users; // username -> User
     private List<Reservation> reservations;
     private final String USER_FILE = "users.dat";
     private final String RESERVATION_FILE = "reservations.dat";
@@ -14,7 +14,7 @@ public class ReservationDatabase {
         reservations = loadReservations();
     }
 
-    //User Management
+    // ------------------ User Management ------------------
     public boolean addUser(User user) {
         if (users.containsKey(user.getUsername())) return false;
         users.put(user.getUsername(), user);
@@ -61,7 +61,7 @@ public class ReservationDatabase {
         }
     }
 
-    //Reservations
+    // ------------------ Reservations ------------------
     public boolean addReservation(Reservation r) {
         reservations.add(r);
         saveReservations();
