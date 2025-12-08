@@ -33,7 +33,7 @@ public class SeatingChartGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Top panel: login, create account, admin, admin-actions
+        // login, create account, admin only functions
         JPanel topPanel = new JPanel();
         JButton loginBtn = new JButton("Login");
         JButton createBtn = new JButton("Create Account");
@@ -59,7 +59,6 @@ public class SeatingChartGUI extends JFrame {
         topPanel.add(setPriceBtn);
         topPanel.add(cancelAllBtn);
 
-        // Date selector (next 7 days)
         dateSelector = new JComboBox<>();
         for (int i = 0; i < 7; i++) {
             LocalDate d = LocalDate.now().plusDays(i);
@@ -68,7 +67,6 @@ public class SeatingChartGUI extends JFrame {
         topPanel.add(new JLabel("Date:"));
         topPanel.add(dateSelector);
 
-        // Time selector (6pm to 10pm)
         timeSelector = new JComboBox<>();
         for (int h = 18; h <= 22; h++) {
             LocalTime t = LocalTime.of(h, 0);
@@ -94,7 +92,6 @@ public class SeatingChartGUI extends JFrame {
         createBtn.addActionListener(e -> createAccount());
         adminBtn.addActionListener(e -> {
             adminLogin();
-            // toggle admin buttons visibility
             boolean visible = isAdmin;
             setHoursBtn.setVisible(visible);
             configureSeatingBtn.setVisible(visible);
@@ -256,7 +253,6 @@ public class SeatingChartGUI extends JFrame {
 
     private void handleSeatClick(int seatIndex) {
         if (isAdmin) {
-            // admin view: show owner (if any) and allow cancel
             Reservation bookedRes = findReservationBySeat(seatIndex);
             if (bookedRes != null) {
                 String owner = bookedRes.getUser().getUsername();
@@ -276,7 +272,6 @@ public class SeatingChartGUI extends JFrame {
                 JOptionPane.showMessageDialog(this, "Seat is not reserved.");
             }
         } else {
-            // normal user flow: must be logged in
             if (currentUser == null) {
                 JOptionPane.showMessageDialog(this, "Please log in first.");
                 return;
