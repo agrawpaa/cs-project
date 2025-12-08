@@ -19,7 +19,6 @@ public class Reservation implements Serializable {
         this.user = user;
         this.date = date;
         this.time = time;
-        // defensive copy
         this.seats = (seats == null) ? new int[0] : Arrays.copyOf(seats, seats.length);
         this.totalPrice = totalPrice;
     }
@@ -40,7 +39,7 @@ public class Reservation implements Serializable {
         return Arrays.copyOf(seats, seats.length);
     }
 
-    // Admin/GUI helper: seats as List<Integer>
+    // seats as List<Integer>
     public List<Integer> getSeatsAsList() {
         List<Integer> list = new ArrayList<>();
         for (int s : seats) list.add(s);
@@ -58,13 +57,13 @@ public class Reservation implements Serializable {
         return false;
     }
 
-    // Two reservations are considered equal if they belong to the same username, date, time and exact seat set.
+    // Two reservations are considered same if they belong to the same username, date, time and exact seat set.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Reservation)) return false;
         Reservation that = (Reservation) o;
-        // Compare username (null-safe), date, time, seats contents
+        // Compare username, date, time, seats contents
         String u1 = (this.user == null) ? null : this.user.getUsername();
         String u2 = (that.user == null) ? null : that.user.getUsername();
         return Objects.equals(u1, u2)
