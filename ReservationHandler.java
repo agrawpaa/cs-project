@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class ReservationHandler {
+public class ReservationHandler implements ReservationManager, AdminControls, UserManager {
     private final ReservationDatabase db;
     private int TOTAL_SEATS = 50; // seats per time slot (modifiable)
     private final Map<Integer, Double> seatPrices; // seatIndex -> price
