@@ -3,8 +3,8 @@ import java.io.Serializable;
 public class Request implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String action; // e.g., "login", "createAccount", "reserve"
-    private Object payload; // any data associated with the action
+    private String action;
+    private Object payload;
 
     public Request(String action, Object payload) {
         this.action = action;
