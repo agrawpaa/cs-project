@@ -14,7 +14,7 @@ public class ReservationDatabase {
         reservations = loadReservations();
     }
 
-    // ------------------ User Management ------------------
+    // User Management
     public boolean addUser(User user) {
         if (users.containsKey(user.getUsername())) return false;
         users.put(user.getUsername(), user);
@@ -61,7 +61,7 @@ public class ReservationDatabase {
         }
     }
 
-    // ------------------ Reservations ------------------
+    //Reservations
     public boolean addReservation(Reservation r) {
         reservations.add(r);
         saveReservations();
