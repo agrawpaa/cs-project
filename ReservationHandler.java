@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ReservationHandler implements ReservationManager, AdminControls, UserManager {
     private final ReservationDatabase db;
-    private int TOTAL_SEATS = 50; // seats per time slot (modifiable)
+    private int TOTAL_SEATS = 50; // seats per time slot
     private final Map<Integer, Double> seatPrices; // seatIndex -> price
     private final Set<Integer> lockedSeats; // seats locked by admin
     private LocalTime openingTime = LocalTime.of(18, 0);
@@ -19,7 +19,7 @@ public class ReservationHandler implements ReservationManager, AdminControls, Us
         for (int i = 0; i < TOTAL_SEATS; i++) seatPrices.put(i, 10.0); // default $10
     }
 
-    // ------------------ User Management ------------------
+    // User Management
     public boolean createAccount(String username, String password) {
         return db.addUser(new User(username, password));
     }
@@ -33,7 +33,7 @@ public class ReservationHandler implements ReservationManager, AdminControls, Us
         return false;
     }
 
-    // ------------------ Admin ------------------
+    // Admin
     public boolean validateAdmin(String key) {
         return ADMIN_KEY.equals(key);
     }
@@ -73,7 +73,7 @@ public class ReservationHandler implements ReservationManager, AdminControls, Us
 
     public int getTotalSeats() { return TOTAL_SEATS; }
 
-    // ------------------ Reservations ------------------
+    // Reservations
     public boolean makeReservation(String username, LocalDate date, LocalTime time, List<Integer> seatList) {
         User user = db.getUser(username);
         if (user == null) return false;
@@ -126,7 +126,6 @@ public class ReservationHandler implements ReservationManager, AdminControls, Us
         return db.removeReservation(r);
     }
 
-    // ----------- GUI helpers -----------
     public Map<Integer, Double> getSeatPrices() {
         return new HashMap<>(seatPrices);
     }
